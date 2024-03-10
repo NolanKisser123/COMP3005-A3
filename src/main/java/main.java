@@ -5,11 +5,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class main {
-    public static void main(String[] args) {
-        String url = "jdbc:postgresql://localhost:5432/Assignment3";
-        String user = "postgres";
-        String password = "admin";
+    public String url = "jdbc:postgresql://localhost:5432/Assignment3";
+    public String user = "postgres";
+    public String password = "admin";
 
+
+    /**
+     * Retrieves and Displays all records from student table
+     */
+    public void getAllStudents(){
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection(url, user, password);
@@ -27,5 +31,37 @@ public class main {
         catch (Exception e){
             System.out.print(e);
         }
+    }
+
+    /**
+     * Inserts a new student record into the students table
+     * @param first_name
+     * @param last_name
+     * @param email
+     * @param date
+     */
+    public void addStudents(String first_name, String last_name, String email, String date){
+
+    }
+
+    /**
+     * Updates the email address for a student with a specified student_id
+     * @param student_id
+     * @param new_email
+     */
+    public void updateStudentEmail(int student_id, String new_email){
+
+    }
+
+    /**
+     * Deletes the record of the student with the specified student_id
+     * @param student_id
+     */
+    public void deleteStudent(int student_id){
+
+    }
+
+    public static void main(String[] args) {
+
     }
 }

@@ -30,7 +30,7 @@ public class Database {
             }
         }
         catch (Exception e){
-            System.out.print(e);
+            System.out.print("Error getting all students: " + e.getMessage());
         }
     }
 
@@ -52,9 +52,11 @@ public class Database {
             preparedStatement.setDate(4, enrollment_date);
             preparedStatement.executeUpdate();
             preparedStatement.close();
+            connection.close();
+            System.out.println("Student added successfully.");
         }
         catch (Exception e){
-            System.out.print(e);
+            System.out.print("Error adding student: "+ e.getMessage());
         }
     }
 
@@ -64,7 +66,24 @@ public class Database {
      * @param new_email
      */
     public void updateStudentEmail(int student_id, String new_email){
-
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE students SET email = ? WHERE student_id = ?");
+            preparedStatement.setString(1, new_email);
+            preparedStatement.setInt(2, student_id);
+            int rowsAffected = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
+            if (rowsAffected > 0){
+                System.out.println("Email updated successfully.");
+            } else {
+                System.out.println("No student found with ID " + student_id);
+            }
+        }
+        catch (Exception e){
+            System.out.print("Error updating email: " + e.getMessage());
+        }
     }
 
     /**
@@ -72,6 +91,22 @@ public class Database {
      * @param student_id
      */
     public void deleteStudent(int student_id){
-
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM students WHERE student_id = ?");
+            preparedStatement.setInt(1, student_id);
+            int rowsAffected = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
+            if (rowsAffected > 0){
+                System.out.println("Student deleted successfully.");
+            } else {
+                System.out.println("No student found with ID " + student_id);
+            }
+        }
+        catch (Exception e){
+            System.out.print("Error deleting student: " + e.getMessage());
+        }
     }
 }

@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Database {
     private String url;
@@ -42,10 +39,23 @@ public class Database {
      * @param first_name
      * @param last_name
      * @param email
-     * @param date
+     * @param enrollment_date
      */
-    public void addStudents(String first_name, String last_name, String email, String date){
-
+    public void addStudent(String first_name, String last_name, String email, Date enrollment_date){
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO students (first_name, last_name, email, enrollment_date) VALUES (?, ?, ?, ?)");
+            preparedStatement.setString(1, first_name);
+            preparedStatement.setString(2, last_name);
+            preparedStatement.setString(3, email);
+            preparedStatement.setDate(4, enrollment_date);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        }
+        catch (Exception e){
+            System.out.print(e);
+        }
     }
 
     /**

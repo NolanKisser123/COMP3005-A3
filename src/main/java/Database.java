@@ -21,6 +21,7 @@ public class Database {
             Statement statement = connection.createStatement();
             statement.executeQuery("SELECT * FROM students");
             ResultSet resultSet = statement.getResultSet();
+            System.out.println("Printing out Student Table:");
             while(resultSet.next()){
                 System.out.print(resultSet.getInt("student_id") + "\t");
                 System.out.print(resultSet.getString("first_name") + "\t");

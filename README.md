@@ -19,3 +19,7 @@ Assumes database is setup on postgres.
 3. Change database connection specifications to match your system
 4. Run the main class
 5. Type the number corresponding to functionalities into the console to test and use
+
+Demonstration Video
+-----------------------------------------------
+[Video Link](https://www.youtube.com/watch?v=iI0zrpHAtSY)
